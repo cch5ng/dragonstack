@@ -10,7 +10,7 @@ const engine = new GenerationEngine();
 app.locals.engine = engine;
 
 app.use('/dragon', dragonRouter);
-app.use('./generation', generationRouter);
+app.use('/generation', generationRouter);
 
 engine.start();
 
