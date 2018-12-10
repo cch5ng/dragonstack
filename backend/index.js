@@ -1,11 +1,13 @@
 const Generation = require('./generation');
+const Engine = require('./engine');
 
 const generation = new Generation();
-
 console.log('generation', generation);
 
-const toothless = generation.newDragon();
+const engine = new Engine(generation);
+engine.checkGenerationExpired();
 
+const toothless = generation.newDragon();
 console.log('toothless', toothless);
 
 
