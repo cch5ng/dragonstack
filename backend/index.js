@@ -1,4 +1,12 @@
+const Generation = require('./generation');
 
+const generation = new Generation();
+
+console.log('generation', generation);
+
+const toothless = generation.newDragon();
+
+console.log('toothless', toothless);
 
 
 // const Dragon = require('./dragon');
