@@ -17,22 +17,28 @@ const Generation = require('./generation');
 class GenerationEngine {
   
   constructor(generation) {
-    this.generation = generation;
+    this.generation = null;
+    this.timer = null;
   }
   
-  newGeneration() {
+  start() {
+    this.buildNewGeneration();
+  }
+  
+  stop() {
+    // purpose is to clear the timeout
+    clearTimeout(this.timer); // node api func
+  }
+  
+  buildNewGeneration() {
     this.generation = new Generation();
+    console.log('generation', this.generation);
+    this.timer = setTimeout(
+      () => this.buildNewGeneration(),
+      this.generation.expiration.getTime() - Date.now()
+    );
   }
   
-  checkGenerationExpired() {
-    if (Date.now() > this.generation.expiration) {
-      this.newGeneration();
-    } else {
-      setTimeout(() => {
-        this.checkGenerationExpired();
-      }, 5000)
-    }
-  }
 }
 
 module.exports = GenerationEngine;

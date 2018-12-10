@@ -1,14 +1,23 @@
-const Generation = require('./generation');
-const Engine = require('./engine');
+const GenerationEngine = require('./engine');
 
-const generation = new Generation();
-console.log('generation', generation);
+const engine = new GenerationEngine();
+engine.start();
 
-const engine = new Engine(generation);
-engine.checkGenerationExpired();
+setTimeout(() => {
+  engine.stop();
+}, 20000);
 
-const toothless = generation.newDragon();
-console.log('toothless', toothless);
+// const Generation = require('./generation');
+// const Engine = require('./engine');
+
+// const generation = new Generation();
+// console.log('generation', generation);
+
+// const engine = new Engine();
+// engine.start();
+
+// const toothless = generation.newDragon();
+// console.log('toothless', toothless);
 
 
 // const Dragon = require('./dragon');
