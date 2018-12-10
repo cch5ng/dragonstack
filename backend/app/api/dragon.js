@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/new', (req, res) => {
   res.json({
-    dragon: engine.generation.newDragon()
+    dragon: req.app.locals.engine.generation.newDragon()
   });
 });
 

@@ -5,6 +5,9 @@ const dragonRouter = require('./api/dragon');
 const app = express();
 const engine = new GenerationEngine();
 
+// allows sharing the engine instance with api routes
+app.locals.engine = engine;
+
 app.use('/dragon', dragonRouter);
 
 engine.start();
