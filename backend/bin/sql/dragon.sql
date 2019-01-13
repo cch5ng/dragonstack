@@ -3,5 +3,5 @@ CREATE TABLE dragon(
 	birthdate 			TIMESTAMP NOT NULL,
 	nickname				VARCHAR(64),
 	"generationId" 	INTEGER,
-	FOREIGN KEY ("generationId") REFERENCES genration(id)
+	FOREIGN KEY ("generationId") REFERENCES generation(id)
 );
