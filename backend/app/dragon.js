@@ -23,7 +23,8 @@ function getRandomInt(max) {
 }
 
 class Dragon {
-    constructor({ birthdate, nickname, traits } = {}) {
+    constructor({ generationId, birthdate, nickname, traits } = {}) {
+        this.generationId = generationId || null;
         this.birthdate = birthdate || DEFAULT_PROPERTIES.birthdate;
         this.nickname = nickname || DEFAULT_PROPERTIES.nickname;
         this.traits = traits || DEFAULT_PROPERTIES.randomTraits;
