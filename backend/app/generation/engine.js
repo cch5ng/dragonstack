@@ -32,14 +32,22 @@ class GenerationEngine {
   }
   
   buildNewGeneration() {
-    this.generation = new Generation();
-    console.log('generation', this.generation);
+    const generation = new Generation(); 
 
-    GenerationTable.storeGeneration(this.generation);
-    this.timer = setTimeout(
-      () => this.buildNewGeneration(),
-      this.generation.expiration.getTime() - Date.now()
-    );
+    GenerationTable.storeGeneration(generation)
+      .then(({ generationId }) => {
+        this.generation = generation;
+        this.generation.generationId = generationId;
+        console.log('generationId', generationId);
+
+        this.timer = setTimeout(
+          () => this.buildNewGeneration(),
+          this.generation.expiration.getTime() - Date.now()
+        );
+      })
+      .catch(err => console.error('error', err))
+
+    ;
   }
   
 }
