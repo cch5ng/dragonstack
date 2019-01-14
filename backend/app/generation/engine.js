@@ -13,6 +13,7 @@ Recursion may come in handy (be careful to avoid infinite loops).
 */
 
 const Generation = require('.');
+const GenerationTable = require('./table');
 
 class GenerationEngine {
   
@@ -33,6 +34,8 @@ class GenerationEngine {
   buildNewGeneration() {
     this.generation = new Generation();
     console.log('generation', this.generation);
+
+    GenerationTable.storeGeneration(this.generation);
     this.timer = setTimeout(
       () => this.buildNewGeneration(),
       this.generation.expiration.getTime() - Date.now()
