@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "clean": "rm -rf dist .cache",
+    "start": "yarn run clean && parcel index.html",
+    "dev": "yarn run start"
   },
   "license": "MIT",
   "dependencies": {
