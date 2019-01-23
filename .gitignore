@@ -1,3 +1,5 @@
 .DS_Store
 backend/node_modules
 backend/secrets
+frontend/node_modules
+frontend/secrets
