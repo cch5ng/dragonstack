@@ -41,11 +41,20 @@ class DragonTable {
 				(err, resp) => {
 					if (err) return reject(err);
 
-					resolve(response.rows[0]);
+					if (resp.rows.length === 0) {
+						return reject(new Error('no dragon'));
+					}
+
+					resolve(resp.rows[0]);
 				}
 			)
 		});
 	}
 }
+
+// test
+// DragonTable.getDragon({ dragonId: 1 })
+// 	.then(dragon => console.log('dragon', dragon))
+// 	.catch(err => console.error('error', err));
 
 module.exports = DragonTable;
