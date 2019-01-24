@@ -15,7 +15,10 @@ class DragonTable {
 
 					const dragonId = resp.rows[0].id;
 
+					// reason for Promise.all is resolve() should not be called until all
+					// promises (for all traits) have resolved
 					Promise.all(
+						// .map() returns array of promises
 						dragon.traits.map(({ traitType, traitValue }) => {
 							return DragonTraitTable.storeDragonTrait({ dragonId, traitType, traitValue })
 						})
