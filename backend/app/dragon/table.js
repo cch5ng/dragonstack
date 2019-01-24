@@ -29,6 +29,23 @@ class DragonTable {
 			)
 		});
 	}
+
+	// he uses a pattern where params are always objects, even if only one param/prop passed in
+	static getDragon({ dragonId }) {
+		return new Promise((resolve, reject) => {
+			pool.query(
+				`SELECT nickname, birthdate, "generationId"
+					FROM dragon
+					WHERE dragon.id = $1`,
+				[dragonId],
+				(err, resp) => {
+					if (err) return reject(err);
+
+					resolve(response.rows[0]);
+				}
+			)
+		});
+	}
 }
 
 module.exports = DragonTable;
