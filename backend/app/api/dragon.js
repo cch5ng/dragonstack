@@ -6,7 +6,7 @@ const router = Router();
 router.get('/new', (req, res, next) => {
 	const dragon = req.app.locals.engine.generation.newDragon();
 
-	DragonTable.storeDragon('foo')///dragon)
+	DragonTable.storeDragon(dragon)
 		.then(({ dragonId }) => {
 			console.log('dragonId', dragonId);
 			dragon.dragonId = dragonId;
