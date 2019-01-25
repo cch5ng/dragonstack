@@ -1,33 +1,35 @@
 const pool = require('../../databasePool');
+const DragonTable = require('./table');
+const Dragon = require('./index');
 
 const getDragonWithTraits = ({ dragonId }) => {
-
 	return Promise.all([
-		DragonTable.getDragon({ dragonId })
+		DragonTable.getDragon({ dragonId }),
+		new Promise((resolve, reject) => {
+			pool.query(
+				`SELECT "traitType", "traitValue"
+					FROM trait 
+					INNER JOIN dragonTrait
+					ON dragonTrait."traitId" = trait.id
+					WHERE dragonTrait."dragonId" = $1`,
+				[dragonId],
+				(err, resp) => {
+					if (err) return reject(err);
 
-
+					resolve(response.rows);
+				}
+			)
+		})
 	])
-
-
-	// return new Promise((resolve, reject) => {
-	// 	pool.query(
-	// 		`SELECT dragon.birthdate, dragon.nickname, dragon."generationId",dragonTrait."dragonId",
-	// 			dragonTrait."traitId", trait."traitType", trait."traitValue"
-	// 			FROM dragon
-	// 			WHERE id = dragonId
-	// 			INNER JOIN dragonTrait on dragonTrait."dragonId" = dragon.id
-	// 			INNER JOIN trait on trait.id = dragonTrait."traitId"`,
-	// 		[],
-	// 		(err, resp) => {
-	// 			if (err) return reject(err);
-
-	// 			// here I'm unclear about the requirement
-	// 			// am I supposed to retrieve a random dragon and why/where is it going to get used
-	// 			// not positive what should be returned, an array of dragon objects
-	// 			// like /app/dragon/index.js?
-
-
-	// 		}
-	// 	)
-	// })
+		// review how you know what the returned values will be
+		.then(([dragon, dragonTraits]) => {
+			// return instance of already defined Dragon class
+			return new Dragon({ ...dragon, dragonId, traits: dragonTraits })
+		})
+		.catch(err => console.error('error', err))
 }
+
+//test
+getDragonWithTraits({ dragonId: 1});
+
+module.exports = { getDragonWithTraits };

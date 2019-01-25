@@ -1,6 +1,7 @@
 const TRAITS = require('../../data/traits');
 
 const DEFAULT_PROPERTIES = {
+    dragonId: undefined,
     nickname: 'unnamed',
     generationId: undefined,
     get birthdate() {
@@ -24,7 +25,8 @@ function getRandomInt(max) {
 }
 
 class Dragon {
-    constructor({ generationId, birthdate, nickname, traits } = {}) {
+    constructor({ dragonId, generationId, birthdate, nickname, traits } = {}) {
+        this.dragonId = dragonId || DEFAULT_PROPERTIES.dragonId;
         this.generationId = generationId || DEFAULT_PROPERTIES.generationId;
         this.birthdate = birthdate || DEFAULT_PROPERTIES.birthdate;
         this.nickname = nickname || DEFAULT_PROPERTIES.nickname;
