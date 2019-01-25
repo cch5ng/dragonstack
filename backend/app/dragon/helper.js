@@ -16,7 +16,7 @@ const getDragonWithTraits = ({ dragonId }) => {
 				(err, resp) => {
 					if (err) return reject(err);
 
-					resolve(response.rows);
+					resolve(resp.rows);
 				}
 			)
 		})
@@ -30,6 +30,9 @@ const getDragonWithTraits = ({ dragonId }) => {
 }
 
 //test
-getDragonWithTraits({ dragonId: 1});
+// getDragonWithTraits({ dragonId: 1})
+// 	.then(dragon => console.log('dragon', dragon))
+// 	.catch(err => console.error('error', err))
+// ;
 
 module.exports = { getDragonWithTraits };
